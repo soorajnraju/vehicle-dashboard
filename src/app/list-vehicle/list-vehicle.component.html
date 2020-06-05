@@ -9,12 +9,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>SL</td>
-            <td>UID</td>
-            <td>Name</td>
-            <td>Last Location</td>
-            <td><a routerLink="/edit-vehicle/1">Edit</a></td>
+        <tr *ngFor="let vehicle of vehicles; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{vehicle.uid}}</td>
+            <td>{{vehicle.name}}</td>
+            <td>{{vehicle.pos_lat+" "+vehicle.pos_lon}}</td>
+            <td><a routerLink="/edit-vehicle/{{vehicle.id}}">Edit</a></td>
         </tr>
     </tbody>
 </table>

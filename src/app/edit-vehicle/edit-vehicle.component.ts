@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Vehicle }  from '../models/vehicle';
 
 @Component({
   selector: 'app-edit-vehicle',
@@ -8,15 +9,18 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class EditVehicleComponent implements OnInit {
 
+  public id: number;
+  protected $id: any;
+
   constructor(private route: ActivatedRoute, private router: Router) {
     
   }
 
   ngOnInit(): void {
-    this.hero$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.service.getHero(params.get('id')))
-    );
+    this.$id = this.route.params.subscribe(params => {
+      this.id = +params['id']; // (+) converts string 'id' to a number
+      // In a real app: dispatch action to load the details here.
+    });
   }
 
 }
