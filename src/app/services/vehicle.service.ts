@@ -1,25 +1,37 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Vehicle } from '../models/vehicle';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
+  apiBaseURL: string;
+  lastVehicle: Vehicle;
 
-  private readonly _vehicles = new BehaviorSubject<Vehicle[]>([]);
-
-  readonly vehicles$ = this._vehicles.asObservable();
-
-  constructor() {
+  constructor(private http: HttpClient) {
+    this.apiBaseURL = environment.apiBaseURL;
   }
 
-  get vehicles(): Vehicle[] {
-    return this._vehicles.getValue();
+  listVehicles() {
+    return this.http.get<any>(this.apiBaseURL+"vehicle/list");
   }
 
-  set vehicles(val: Vehicle[]) {
-    this._vehicles.next(val);
+  findVehicleById(_id){
+    return this.http.get<any>(this.apiBaseURL+"vehicle/"+_id);
   }
-  
+
+  createVehicle(vehicle: Vehicle) {
+    this.http.post<any>(this.apiBaseURL + "vehicle/create", vehicle).subscribe((data)=>{
+      if(data.status==="success"){
+        this.lastVehicle = data.data.vehicle;
+      }else{
+        this.lastVehicle = null;
+      }
+      return this.lastVehicle;
+    });
+  }
+
 }

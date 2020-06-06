@@ -1,20 +1,20 @@
 export const VEHICLES =  [
     {
-        id: 1,
+        _id: "a1",
         uid: "v101",
         name: "Toyota",
         pos_lat: "18.101",
         pos_lon: "70.78"
     },
     {
-        id: 2,
+        _id: "a2",
         uid: "v102",
         name: "Subaru",
         pos_lat: "18.101",
         pos_lon: "70.78"
     },
     {
-        id: 3,
+        _id: "a3",
         uid: "v103",
         name: "Ferrari",
         pos_lat: "18.101",

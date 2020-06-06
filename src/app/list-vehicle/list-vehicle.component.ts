@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VEHICLE, VEHICLES } from '../data/vehicle';
+import { VEHICLES } from '../data/vehicle';
 import { VehicleService } from '../services/vehicle.service';
 import { Vehicle } from '../models/vehicle';
 import { of } from 'rxjs';
@@ -14,7 +14,15 @@ export class ListVehicleComponent implements OnInit {
   vehicles: Vehicle[];
 
   constructor(private vehicleServcie: VehicleService) {
-    this.vehicles = vehicleServcie.vehicles = VEHICLES;
+    //this.vehicles = vehicleServcie.vehicles = VEHICLES;
+    this.vehicleServcie.listVehicles().subscribe((data)=>{
+      //console.log(data);
+      if(data.status==="success"){
+        this.vehicles = data.data.vehicles;
+      }else{
+        this.vehicles = [];
+      }
+    });
   }
 
   ngOnInit(): void {
