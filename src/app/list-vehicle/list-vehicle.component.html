@@ -5,6 +5,7 @@
             <td>UID</td>
             <td>Name</td>
             <td>Last Location</td>
+            <td>Last Speed</td>
             <td>Action</td>
         </tr>
     </thead>
@@ -14,6 +15,7 @@
             <td>{{vehicle.uid}}</td>
             <td>{{vehicle.name}}</td>
             <td>{{vehicle.pos_lat+" "+vehicle.pos_lon}}</td>
+            <td>{{vehicle.speed|number}}m/s</td>
             <td><a routerLink="/edit-vehicle/{{vehicle._id}}">Edit</a></td>
         </tr>
     </tbody>
