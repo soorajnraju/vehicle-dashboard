@@ -18,7 +18,7 @@ export class ListVehicleComponent implements OnInit {
     this.vehicleServcie.listVehicles().subscribe((data)=>{
       //console.log(data);
       if(data.status==="success"){
-        this.vehicles = data.data.vehicles;
+        this.vehicles = this.vehicleServcie.vehicles = data.data.vehicles;
       }else{
         this.vehicles = [];
       }

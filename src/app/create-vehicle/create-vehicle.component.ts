@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { VehicleService } from '../services/vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-vehicle',
@@ -9,9 +10,11 @@ import { VehicleService } from '../services/vehicle.service';
 })
 export class CreateVehicleComponent implements OnInit {
 
-  submitForm;
+  submitForm: any;
 
-  constructor(private formBuilder: FormBuilder, private vehicleService: VehicleService) {
+  constructor(private formBuilder: FormBuilder,
+     private vehicleService: VehicleService,
+      private router: Router) {
     this.submitForm = this.formBuilder.group({
       _id: '',
       uid: '',
@@ -28,8 +31,12 @@ export class CreateVehicleComponent implements OnInit {
 
   onSubmit(vehicleData) {
     // Process submitForm data here
-    let lastVehicle = this.vehicleService.createVehicle(vehicleData);
-    lastVehicle!==null?this.submitForm.reset():'';
+    this.vehicleService.createVehicle(vehicleData).subscribe((data)=>{
+      if(data.status === "success"){
+        //this.submitForm.reset()
+        this.router.navigate(['list-vehicle']);
+      }
+    });
   }
 
 }

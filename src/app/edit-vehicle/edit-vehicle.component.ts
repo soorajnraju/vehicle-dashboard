@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Vehicle } from '../models/vehicle';
 import { FormBuilder } from '@angular/forms';
 import { VEHICLES } from '../data/vehicle';
 import { VehicleService } from '../services/vehicle.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-vehicle',
@@ -16,11 +17,12 @@ export class EditVehicleComponent implements OnInit {
   protected _id$: any;
   protected vehicle: Vehicle;
 
-  submitForm;
+  submitForm: any;
 
   constructor(private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private vehicleService: VehicleService) {
+    private vehicleService: VehicleService,
+    private router: Router) {
     this.submitForm = this.formBuilder.group({
       _id: '',
       uid: '',
@@ -53,7 +55,12 @@ export class EditVehicleComponent implements OnInit {
 
   onSubmit(vehicleData) {
     // Process submitForm data here
-    this.submitForm.reset();
+    this.vehicleService.updateVehicle(vehicleData).subscribe((data) => {
+      if (data.status === "success") {
+        //this.submitForm.reset();
+        this.router.navigate(['list-vehicle']);
+      }
+    });
   }
 
 }
