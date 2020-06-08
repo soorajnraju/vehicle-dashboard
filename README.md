@@ -18,7 +18,7 @@ Open http://localhost:4200/ on your browser
 
 ```docker build -t vehicle-dashboard:dev .```
 
-```docker run -d --name vehicle-dashboard -p 4200:4200 vehicle-dashboard:dev```
+```docker run -d -p 4200:4200 vehicle-dashboard:dev```
 
 Open http://localhost:4200/ on your browser
 
