@@ -4,24 +4,26 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```cd vehicle-dashboard```
 
-## Code scaffolding
+```npm install```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```ng serve```
 
-## Build
+Open http://localhost:4200/ on your browser
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Docker
 
-## Running unit tests
+```cd vehicle-dashboard```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```docker build -t vehicle-dashboard:dev .```
 
-## Running end-to-end tests
+```docker run -d --name vehicle-dashboard -p 4200:4200 vehicle-dashboard:dev```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Open http://localhost:4200/ on your browser
 
-## Further help
+## User guide
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. Add new vehicle by inputting uid, name, latitude and longitude (You can pick a location from google map).
+2. Edit the newly created vehicle with an updated latitude and longitude (You can pick a nearby point to the current one from google map).
+3. Once the latitude and longitude updated the dashboard will show the current speed and last covered distance.
